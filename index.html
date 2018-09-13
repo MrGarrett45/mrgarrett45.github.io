@@ -19,6 +19,49 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 	padding: 5px;
 }
 
+.gallery {
+ 	width:300px;
+     	height:200px;
+     	position: relative;
+     	padding: 0;
+     	margin: 0;
+     	text-align: center;
+}
+
+.gallery-image{
+     	cursor:pointer;
+     	position: relative;
+     	display: block;
+}
+
+.gallery-text{
+	position: absolute;
+	top: 0; right: 0;
+	bottom: 0; left: 0;
+	width: 300px;
+	height: 200px; 
+	text-align: center;
+	background-color: rgba(0,0,0,0.8);
+	opacity: 0;
+	-webkit-transition: opacity 0.6s;
+	-moz-transition: opacity 0.6s;
+	transition: opacity 0.6s;
+        vertical-align:middle;
+        line-height:200px;
+}
+
+.gallery-text:hover{
+        opacity: 1;      
+}
+
+.gallery-text h3{
+	color: white;
+	display: inline-table;
+        vertical-align:middle;
+        line-height:100%;            
+}
+
+
 </style>
 <body class="w3-light-grey">
 <!-- Page Container -->
@@ -134,12 +177,15 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 	   <div class="row">
   	    <div class="column">
-	     <p>Cage The Elephant</p>
-	     <p>Cage the Elephant<img src="addOns/CageTheElephantNew.png" alt="Snow" style="width:90%" align="middle"></p>
+	     <div class="gallery">
+ 	     <div class="gallery-image">
+	      <img src="addOns/CageTheElephantNew.png" style="width:90%" align="middle">
+	     <div class="gallery-text">
+	      <h6>Cage The Elephant</h6>
   	    </div>
   	    <div class="column">
 	     <p>Linkin Park</p>
-    	     <img src="addOns/linkinPark.png" alt="Forest" style="width:90%">
+    	     <img src="addOns/linkinPark.png" style="width:90%">
   	    </div>
 	   </div>         
 	 <hr>
