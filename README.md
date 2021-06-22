@@ -1,2 +1,2 @@
 # mrgarrett45.github.io
-Personal website
+Personal website hosted at garrett-mclaughlin.com
