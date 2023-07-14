@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+  <title>Garrett McLaughlin</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Roboto"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <style>
+    html,
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Roboto", sans-serif;
+    }
+
+    .row {
+      display: flex;
+    }
+
+    .column {
+      flex: 33.33%;
+      padding: 5px;
+    }
+
+    .gallery {
+      position: relative;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+    }
+
+    .gallery-image {
+      cursor: pointer;
+      position: relative;
+      display: block;
+    }
+
+    .gallery-text {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 90%;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.8);
+      opacity: 0;
+      -webkit-transition: opacity 0.6s;
+      -moz-transition: opacity 0.6s;
+      transition: opacity 0.6s;
+      vertical-align: middle;
+      line-height: 200px;
+    }
+
+    .gallery-text:hover {
+      opacity: 1;
+    }
+
+    .gallery-text h3 {
+      color: white;
+      display: inline-table;
+      vertical-align: middle;
+      line-height: 100%;
+    }
+  </style>
+  <body class="w3-light-grey">
+    <!-- Page Container -->
+    <div class="w3-content w3-margin-top" style="max-width: 1400px">
+      <!-- The Grid -->
+      <div class="w3-row-padding">
+        <!-- End Grid -->
+        <p></p>
+        <div class="w3-container w3-card w3-white">
+          <h2 class="w3-text-grey w3-padding-16">
+            <i
+              class="fa fa-wrench fa-fw w3-margin-right w3-xxlarge w3-text-teal"
+            ></i
+            >Projects
+          </h2>
+          <!-- New Project -->
+          <div class="w3-container">
+            <h5 class="w3-opacity"><b>Blirb.io</b></h5>
+            <p>
+              Beta version for a website where you can create groups and share
+              movies/tv shows/books/podcast recommendations. I was responsible
+              for creating the frontend using Angular 2+. Uses all the
+              components of any complex angular project including rxjs,
+              dependency injection, routing, interceptors, services, etc.
+            </p>
+
+            <p>
+              The backend is written in Django which was done by my brother and
+              it's hosted on AWS and uses services such as S3 for hosting
+              images. We query tmdb for movies/tv shows, Spotify for podcasts,
+              and Google Books for books
+            </p>
+
+            <p>
+              The easiest way to get a feel for the site is by visiting it and
+              using signup code BLANK which will automatically put you in some
+              groups with some recommendations, however I will also provide some
+              images below. If you don't have a signup code you won't be able to
+              get in for the time being. Also developing an app for it in React
+              Native as of June 2021.
+            </p>
+
+            <div class="row">
+              <div class="column">
+                <img src="addOns/BlirbMainScreen.png" style="width: 90%" />
+                <p>
+                  What you see when you login, your list of groups and a main
+                  feed showing recommendations from all your groups.
+                </p>
+              </div>
+              <div class="column">
+                <img src="addOns/BlirbSearch.png" style="width: 90%" />
+                <p>
+                  Where you can search for media to add to your groups or your
+                  peronsal lists on your profile page.
+                </p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="column">
+                <img src="addOns/BlirbNotifications.png" style="width: 90%" />
+                <p>
+                  Notifications page, where you're able to navigate to particlar
+                  comments you've been mentioned on and other updates.
+                </p>
+              </div>
+              <div class="column">
+                <img src="addOns/BlirbProfilePage.png" style="width: 90%" />
+                <p>
+                  Profile page where you're able to change profile picture,
+                  create and add to your lists.
+                </p>
+              </div>
+            </div>
+
+            <img src="addOns/BlirbDesignDoc.png" style="width: 90%" />
+            <p>
+              Early design doc laying out some of the models we use and how they
+              interact with each other.
+            </p>
+            <hr />
+          </div>
+          <!-- End Project -->
+        </div>
+      </div>
+    </div>
+
+    <!-- End Page Container -->
+
+    <footer class="w3-container w3-teal w3-center w3-margin-top">
+      <p>Find me on social media.</p>
+      <a href="https://github.com/MrGarrett45"
+        ><i class="fa fa-github w3-hover-opacity"></i
+      ></a>
+      <a href="https://linkedin.com/in/garrett-mclaughlin-b82b29132/"
+        ><i class="fa fa-linkedin w3-hover-opacity"></i
+      ></a>
+    </footer>
+  </body>
+</html>
