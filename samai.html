@@ -30,70 +30,176 @@
           >
           <!-- New Project -->
           <div class="w3-container">
-            <h5 class="w3-opacity"><b>Blirb.io</b></h5>
-            <p>
-              Beta version for a website where you can create groups and share
-              movies/tv shows/books/podcast recommendations. I was responsible
-              for creating the frontend using Angular 2+. Uses all the
-              components of any complex angular project including rxjs,
-              dependency injection, routing, interceptors, services, etc.
-            </p>
+            <h1 class="w3-opacity"><b>SamAI</b></h1>
+            <section>
+              <h2>Introduction</h2>
+              <p>
+                I wanted to create a project that would both get me familiar
+                with the latest AI technology coming out and also put the AWS
+                Solutions Architect Professional certificate I recently received
+                to use. I settled on creating an AI powered financial advisor
+                that would make it simple for the user to input their financial
+                information and ask questions with the bot being aware of that
+                input so it can tailor specific advice. Although this is only a
+                side project, I do believe that given only a limited number of
+                people have access to a financial advisor democratizing some of
+                that access to high quality financial advice can go a long way
+                in making solid financial information available to everyone. I
+                am certain in the future companies like Mint or your whichever
+                bank you use will have these bots built into their services but
+                I wanted to see what I could create on my own and as a software
+                engineer test out some of the technology that I'm sure will be
+                finding it's way into my work sooner or later.
+              </p>
+            </section>
 
-            <p>
-              The backend is written in Django which was done by my brother and
-              it's hosted on AWS and uses services such as S3 for hosting
-              images. We query tmdb for movies/tv shows, Spotify for podcasts,
-              and Google Books for books
-            </p>
+            <section>
+              <h2>Technologies Used</h2>
+              <ul>
+                <li>AI (Open AI's ChatGPT API)</li>
+                <li>Angular 2+</li>
+                <li>Express.js (with Typescript)</li>
+                <li>AWS Serverless (with Terraform for IaC)</li>
+              </ul>
+              <p>
+                My choice of frontend/backend tech here was fairly simple. I
+                wanted to balance what I was comfortable with with what made the
+                most technical sense. I've used Angular 2+ professionally for a
+                number of years so that was a simple choice. Most of my backend
+                development work has been with .NET/C# but I decided to try
+                something new with Express for the purpose of keeping the entire
+                codebase (besides the Terraform) in Typescript. This allowed for
+                quick development, ability to reuse code, and simplified the
+                hosting process.
+              </p>
+              <p>
+                Going with AWS was another simple choice because of the
+                certificate I mentione receiving above as well as being the
+                cloud provider I'm most comfortable with. The decision to go
+                with serverless technologies was due to both cost and getting
+                the project off the ground as quickly as possible. The most
+                difficult decision I faced was whether to go with Lambda for the
+                backend or host servers/containers on EC2/ECS. I settled on
+                Lambda due to both ease and the fact that I am not anticipating
+                there to be a large number of users on this project. I am aware
+                that Lambda API's can get expensive with a large number of users
+                but I believe for the small number of users I am expecting it
+                will be cheaper to use Lambda than host a traditional server. I
+                also considered the problem of having to deal with Lambda "cold
+                starts" but decided I can live with the potential for queries to
+                take longer than I'd like in some scenarios but I still believe
+                the pros outweigh the cons. Choosing DynamoDB was primarily
+                because I haven't used it before and wanted to get a feel for it
+                while also not wanting the hassle of maintaining an RDS
+                instance. However, after using DynamoDB for this project I still
+                much prefer Postgres to it and would probably go through the
+                trouble of setting up RDS for future projects.
+              </p>
+            </section>
 
-            <p>
-              The easiest way to get a feel for the site is by visiting it and
-              using signup code BLANK which will automatically put you in some
-              groups with some recommendations, however I will also provide some
-              images below. If you don't have a signup code you won't be able to
-              get in for the time being. Also developing an app for it in React
-              Native as of June 2021.
-            </p>
+            <section>
+              <h2>Architecture Overview</h2>
+              <img
+                src="addOns/samai-architecture.png"
+                alt="Architecture Diagram"
+                style="width: 90%"
+              />
+            </section>
 
-            <div class="row">
-              <div class="column">
-                <img src="addOns/BlirbMainScreen.png" style="width: 90%" />
-                <p>
-                  What you see when you login, your list of groups and a main
-                  feed showing recommendations from all your groups.
-                </p>
-              </div>
-              <div class="column">
-                <img src="addOns/BlirbSearch.png" style="width: 90%" />
-                <p>
-                  Where you can search for media to add to your groups or your
-                  peronsal lists on your profile page.
-                </p>
-              </div>
-            </div>
+            <section>
+              <h2>AI Integration</h2>
+              <p>
+                The integration of AI is done through Open AI's
+                <a
+                  href="https://platform.openai.com/docs/guides/gpt/chat-completions-api"
+                  >Chat Completion API</a
+                >. The model is sent a "system prompt" that tells it how to act.
+                I instruct it with something along the lines of "you are a
+                financial advisor and the user is your client, the client has
+                provided {x} information use that to calibrate your advice",
+                where {x} is the financial information the user has sent
+                formatted into a string in plain english. Everytime a new
+                message is sent the model must be fed the entire history of the
+                chat so it can have "memory" of the previous messages. When a
+                user sends a new message the backend will check DynamoDB for
+                previous messages and if they exist it will add the new message
+                to the top of the list and send the entire thing to the model.
+              </p>
+            </section>
 
-            <div class="row">
-              <div class="column">
-                <img src="addOns/BlirbNotifications.png" style="width: 90%" />
-                <p>
-                  Notifications page, where you're able to navigate to particlar
-                  comments you've been mentioned on and other updates.
-                </p>
-              </div>
-              <div class="column">
-                <img src="addOns/BlirbProfilePage.png" style="width: 90%" />
-                <p>
-                  Profile page where you're able to change profile picture,
-                  create and add to your lists.
-                </p>
-              </div>
-            </div>
+            <section>
+              <h2>Front-end Development with Angular</h2>
+              <p>
+                I wanted to stick with one component library for a consistent
+                look so I went with
+                <a href="https://akveo.github.io/nebular/">Nebular</a>. Normally
+                I use material or ngbootstrap but they both lacked a chat
+                component so I chose nebular and found it very easy to use. I've
+                previously implemented my own chat components (for the Blirb
+                project linked on my main page) and know it can be difficult so
+                decided to go with something prebuilt. After implementing my own
+                auth with that project as well I decided to go with Auth0 for
+                this project just to get it off the ground quickly. It's worked
+                well thus far and I am glad to offload the managing of passwords
+                but I will be keeping an eye on the costs. I do use an auth0
+                event to hit my "signup" endpoint on the backend once a user has
+                signed up so I can add the user to my own database as well as
+                having them in auth0.
+              </p>
+            </section>
 
-            <img src="addOns/BlirbDesignDoc.png" style="width: 90%" />
-            <p>
-              Early design doc laying out some of the models we use and how they
-              interact with each other.
-            </p>
+            <section>
+              <h2>Back-end Development with Express.js</h2>
+              <p>
+                Not a ton to say here, it was very easy to configure Express to
+                use Typescript and the basic pattern of the framework makes it
+                extremely easy to get something up and running quickly. I did
+                have to do some interesting work for converting the financial
+                information form into plain english thats suitable for the model
+                to read. I employed a technique of checking for each input and
+                if it exists forming that into a normal sentence and adding it
+                on to a continuously growing list of assets/info. This all gets
+                incorporated into the system prompt at the beginning instead of
+                being appended to each message to the bot.
+              </p>
+            </section>
+
+            <section>
+              <h2>CI/CD</h2>
+              <p>
+                The code for this project was all hosted in Github (monorepo)
+                and gets deployed via CodeBuild. For the frontend CodeBuild
+                simply builds the project then updates the S3 bucket it lives in
+                with the new files. For the backend CodeBuild will build the
+                latest code and update the lambda function that code lives in.
+              </p>
+
+              <p>
+                Management of infrastructure is all done via Terraform. I used a
+                pattern of having a central AWS accounts and set up SSO for
+                development/production accounts alongside Terraform Workspaces
+                for each. This enabled me to easily scale up different
+                environments for testing and keep separation between the
+                environments.
+              </p>
+            </section>
+
+            <section>
+              <h2>Future Development</h2>
+              <p>
+                For the time being I'm going to step away from this project and
+                focus on other things, but depending on if people get interested
+                or not I may increase complexity or consider something such as
+                hosting my own model I can more finely tune. The fact that it
+                was fairly simple for someone like me with no formal AI
+                experience to pick up this technology and create a product in a
+                relatively short amount of time convinced me of it's power and
+                that we will be seeing much more of it all over the place in
+                short order. I do believe if a project like mine was to be
+                integrated with something like Mint where all your financial
+                information already lives it could be extremely powerful.
+              </p>
+            </section>
             <hr />
           </div>
           <!-- End Project -->
