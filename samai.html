@@ -113,19 +113,20 @@
                 <a
                   href="https://platform.openai.com/docs/guides/gpt/chat-completions-api"
                   >Chat Completion API</a
-                >. For model I've currently selected gpt-4, although depending
-                on cost I may return to gpt-3.5-turbo. The model is sent a
-                "system prompt" that tells it how to act. I instruct it with
-                something along the lines of "you are a financial advisor and
-                the user is your client, the client has provided {x} information
-                use that to calibrate your advice", where {x} is the financial
-                information the user has sent formatted into a string in plain
-                english. Everytime a new message is sent the model must be fed
-                the entire history of the chat so it can have "memory" of the
-                previous messages. When a user sends a new message the backend
-                will check DynamoDB for previous messages and if they exist it
-                will add the new message to the top of the list and send the
-                entire thing to the model.
+                >. For model I've currently selected gpt-4-0613. I'm going to
+                try and run it on this for now but if it gets too costly I will
+                switch to gpt-3.5-turbo. The model is sent a "system prompt"
+                that tells it how to act. I instruct it with something along the
+                lines of "you are a financial advisor and the user is your
+                client, the client has provided {x} information use that to
+                calibrate your advice", where {x} is the financial information
+                the user has sent formatted into a string in plain english.
+                Everytime a new message is sent the model must be fed the entire
+                history of the chat so it can have "memory" of the previous
+                messages. When a user sends a new message the backend will check
+                DynamoDB for previous messages and if they exist it will add the
+                new message to the top of the list and send the entire thing to
+                the model.
               </p>
             </section>
 
